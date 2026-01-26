@@ -1,0 +1,14 @@
+# Local development overrides
+# This file is not committed to version control
+
+services:
+  php:
+    environment:
+      - APP_ENV=dev
+      - APP_DEBUG=1
+    volumes:
+      - .:/var/www/html:cached
+
+  database:
+    ports:
+      - "3306:3306"

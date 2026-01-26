@@ -1,0 +1,17 @@
+.git
+.gitignore
+.idea
+.vscode
+*.md
+.env.local
+.env.*.local
+var/cache/*
+var/log/*
+var/sessions/*
+!var/cache/.gitkeep
+!var/log/.gitkeep
+!var/sessions/.gitkeep
+node_modules
+vendor
+tests
+test-setup.php
