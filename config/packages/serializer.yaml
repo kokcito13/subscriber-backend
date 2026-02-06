@@ -1,0 +1,9 @@
+framework:
+    serializer:
+        enabled: true
+        enable_attributes: true
+        mapping:
+            paths: ['%kernel.project_dir%/src/Entity', '%kernel.project_dir%/src/Dto']
+        default_context:
+            enable_max_depth_checks: false
+            json_encode_options: 64
