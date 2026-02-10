@@ -10,7 +10,6 @@ use App\Dto\SubscriptionResponse;
 use App\Dto\UpdateSubscriptionRequest;
 use App\Entity\Subscription;
 use App\Repository\SubscriptionRepository;
-use App\Service\UserProviderService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,17 +27,16 @@ class SubscriptionController extends AbstractController
         private readonly SubscriptionRepository $subscriptionRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly SerializerInterface $serializer,
-        private readonly ValidatorInterface $validator,
-        private readonly UserProviderService $userProvider
+        private readonly ValidatorInterface $validator
     ) {}
 
     #[Route('', name: 'create', methods: ['POST'])]
     public function createSubscription(
         #[MapRequestPayload] CreateSubscriptionRequest $request
     ): JsonResponse {
-        $user = $this->userProvider->getCurrentUser();
-        if (!$user) {
-            return new JsonResponse(['error' => 'No user found'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        $user = $this->getUser();
+        if (!$user instanceof \App\Entity\User) {
+            return new JsonResponse(['error' => 'No authenticated user'], Response::HTTP_UNAUTHORIZED);
         }
 
         $subscription = new Subscription();
@@ -64,9 +62,9 @@ class SubscriptionController extends AbstractController
     #[Route('', name: 'list', methods: ['GET'])]
     public function listSubscriptions(Request $request): JsonResponse
     {
-        $user = $this->userProvider->getCurrentUser();
-        if (!$user) {
-            return new JsonResponse(['error' => 'No user found'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        $user = $this->getUser();
+        if (!$user instanceof \App\Entity\User) {
+            return new JsonResponse(['error' => 'No authenticated user'], Response::HTTP_UNAUTHORIZED);
         }
 
         $criteria = ['user' => $user];
@@ -93,9 +91,9 @@ class SubscriptionController extends AbstractController
     #[Route('/{id}', name: 'show', methods: ['GET'], requirements: ['id' => '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'])]
     public function showSubscription(string $id): JsonResponse
     {
-        $user = $this->userProvider->getCurrentUser();
-        if (!$user) {
-            return new JsonResponse(['error' => 'No user found'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        $user = $this->getUser();
+        if (!$user instanceof \App\Entity\User) {
+            return new JsonResponse(['error' => 'No authenticated user'], Response::HTTP_UNAUTHORIZED);
         }
 
         $subscription = $this->subscriptionRepository->findOneBy(['id' => $id, 'user' => $user]);
@@ -114,9 +112,9 @@ class SubscriptionController extends AbstractController
         string $id,
         #[MapRequestPayload] UpdateSubscriptionRequest $request
     ): JsonResponse {
-        $user = $this->userProvider->getCurrentUser();
-        if (!$user) {
-            return new JsonResponse(['error' => 'No user found'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        $user = $this->getUser();
+        if (!$user instanceof \App\Entity\User) {
+            return new JsonResponse(['error' => 'No authenticated user'], Response::HTTP_UNAUTHORIZED);
         }
 
         $subscription = $this->subscriptionRepository->findOneBy(['id' => $id, 'user' => $user]);
@@ -161,9 +159,9 @@ class SubscriptionController extends AbstractController
     #[Route('/{id}/cancel', name: 'cancel', methods: ['POST'], requirements: ['id' => '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'])]
     public function cancelSubscription(string $id): JsonResponse
     {
-        $user = $this->userProvider->getCurrentUser();
-        if (!$user) {
-            return new JsonResponse(['error' => 'No user found'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        $user = $this->getUser();
+        if (!$user instanceof \App\Entity\User) {
+            return new JsonResponse(['error' => 'No authenticated user'], Response::HTTP_UNAUTHORIZED);
         }
 
         $subscription = $this->subscriptionRepository->findOneBy(['id' => $id, 'user' => $user]);
@@ -181,9 +179,9 @@ class SubscriptionController extends AbstractController
     #[Route('/{id}/pause', name: 'pause', methods: ['POST'], requirements: ['id' => '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'])]
     public function pauseSubscription(string $id): JsonResponse
     {
-        $user = $this->userProvider->getCurrentUser();
-        if (!$user) {
-            return new JsonResponse(['error' => 'No user found'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        $user = $this->getUser();
+        if (!$user instanceof \App\Entity\User) {
+            return new JsonResponse(['error' => 'No authenticated user'], Response::HTTP_UNAUTHORIZED);
         }
 
         $subscription = $this->subscriptionRepository->findOneBy(['id' => $id, 'user' => $user]);
@@ -201,9 +199,9 @@ class SubscriptionController extends AbstractController
     #[Route('/{id}/resume', name: 'resume', methods: ['POST'], requirements: ['id' => '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'])]
     public function resumeSubscription(string $id): JsonResponse
     {
-        $user = $this->userProvider->getCurrentUser();
-        if (!$user) {
-            return new JsonResponse(['error' => 'No user found'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        $user = $this->getUser();
+        if (!$user instanceof \App\Entity\User) {
+            return new JsonResponse(['error' => 'No authenticated user'], Response::HTTP_UNAUTHORIZED);
         }
 
         $subscription = $this->subscriptionRepository->findOneBy(['id' => $id, 'user' => $user]);
@@ -221,9 +219,9 @@ class SubscriptionController extends AbstractController
     #[Route('/{id}', name: 'delete', methods: ['DELETE'], requirements: ['id' => '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'])]
     public function deleteSubscription(string $id): JsonResponse
     {
-        $user = $this->userProvider->getCurrentUser();
-        if (!$user) {
-            return new JsonResponse(['error' => 'No user found'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        $user = $this->getUser();
+        if (!$user instanceof \App\Entity\User) {
+            return new JsonResponse(['error' => 'No authenticated user'], Response::HTTP_UNAUTHORIZED);
         }
 
         $subscription = $this->subscriptionRepository->findOneBy(['id' => $id, 'user' => $user]);
