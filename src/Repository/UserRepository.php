@@ -26,4 +26,20 @@ class UserRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    /**
+     * Return array of users that match the given API key prefix.
+     * The authenticator will iterate candidates and verify the full token hash.
+     *
+     * @return User[]
+     */
+    public function findByApiKeyPrefix(string $prefix): array
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.apiKeyPrefix = :prefix')
+            ->andWhere('u.apiKeyHash IS NOT NULL')
+            ->setParameter('prefix', $prefix)
+            ->getQuery()
+            ->getResult();
+    }
 }

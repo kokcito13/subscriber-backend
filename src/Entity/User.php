@@ -10,13 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: 'users')]
 #[ORM\Index(columns: ['email'], name: 'idx_user_email')]
 #[ORM\HasLifecycleCallbacks]
 #[UniqueEntity(fields: ['email'], message: 'Email is already taken.')]
-class User
+class User implements UserInterface
 {
     #[ORM\Id]
     #[ORM\Column(type: Types::GUID)]
@@ -100,5 +101,30 @@ class User
     public function setUpdatedAtValue(): void
     {
         $this->updatedAt = new \DateTimeImmutable();
+    }
+
+    // -- UserInterface implementation ------------------------------------
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * Return roles granted to the user. Keep at least ROLE_USER by default.
+     *
+     * @return string[]
+     */
+    public function getRoles(): array
+    {
+        return ['ROLE_USER'];
+    }
+
+    /**
+     * If you store any temporary, sensitive data on the user, clear it here.
+     */
+    public function eraseCredentials(): void
+    {
+        // nothing to do for API token users
     }
 }

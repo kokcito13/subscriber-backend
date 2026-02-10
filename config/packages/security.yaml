@@ -1,0 +1,17 @@
+security:
+  providers:
+    app_user_provider:
+      entity:
+        class: App\Entity\User
+        property: id
+
+  firewalls:
+    main:
+      pattern: ^/
+      stateless: true
+      custom_authenticators:
+        - App\Security\TokenAuthenticator
+
+  access_control:
+    - { path: ^/v1, roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/test, roles: IS_AUTHENTICATED_ANONYMOUSLY }
