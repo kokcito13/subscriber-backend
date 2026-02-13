@@ -73,7 +73,7 @@ jobs:
             ./ \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/
 
-      - name: Post-deploy: install deps, cache, migrations
+      - name: 'Post-deploy: install deps, cache, migrations'
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
