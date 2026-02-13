@@ -15,7 +15,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2"   # set to what your InfinityFree site runs
+          php-version: "8.4"   # updated to match composer.json & lockfile
           tools: composer
 
       - name: Install dependencies (prod)
