@@ -57,6 +57,11 @@ jobs:
             set ftp:passive-mode on;
             open -u $FTP_USER,$FTP_PASS $FTP_HOST;
             mirror -R --delete --verbose \
+              --no-perms \
+              --exclude-glob '.git' \
+              --exclude-glob '.git/*' \
+              --exclude-glob '.idea' \
+              --exclude-glob '.idea/*' \
               --exclude-glob .git* \
               --exclude-glob .github/ \
               --exclude-glob tests/ \
