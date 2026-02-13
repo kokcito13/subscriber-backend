@@ -4,11 +4,16 @@ namespace App\Command;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(
+    name: 'app:manage-api-key',
+    description: 'Create an API token for a user'
+)]
 class ManageApiKeyCommand extends Command
 {
     protected static $defaultName = 'app:manage-api-key';

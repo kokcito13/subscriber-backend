@@ -89,6 +89,7 @@ jobs:
             APP_DEBUG=0
             APP_SECRET=${{ secrets.APP_SECRET }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
+            DEFAULT_URI=http://localhost
             EOF
 
             composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
