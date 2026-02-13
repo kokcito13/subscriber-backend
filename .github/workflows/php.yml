@@ -42,49 +42,60 @@ jobs:
           rm -rf var/cache var/log
           mkdir -p var/cache var/log
 
-      - name: Install lftp
-        run: sudo apt-get update && sudo apt-get install -y lftp
+      - name: Install rsync
+        run: sudo apt-get update && sudo apt-get install -y rsync
 
-      - name: Deploy via FTP (mirror)
-        env:
-          FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_USER: ${{ secrets.FTP_USER }}
-          FTP_PASS: ${{ secrets.FTP_PASS }}
-          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
+      - name: Start SSH agent and add key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy files via rsync over SSH
         run: |
-          lftp -c "
-            set ftp:ssl-allow no;
-            set ftp:passive-mode on;
-            open -u $FTP_USER,$FTP_PASS $FTP_HOST;
-            mirror -R --delete --verbose \
-              --no-perms \
-              --exclude-glob '.git' \
-              --exclude-glob '.git/*' \
-              --exclude-glob '.idea' \
-              --exclude-glob '.idea/*' \
-              --exclude-glob '.dockerignore' \
-              --exclude-glob 'docker' \
-              --exclude-glob 'docker/*' \
-              --exclude-glob 'openapi' \
-              --exclude-glob 'openapi/*' \
-              --exclude-glob 'bin' \
-              --exclude-glob 'bin/*' \
-              --exclude-glob 'migrations' \
-              --exclude-glob 'migrations/*' \
-              --exclude-glob 'composer.json' \
-              --exclude-glob 'composer.lock' \
-              --exclude-glob 'symfony.lock' \
-              --exclude-glob 'docker-start.sh' \
-              --exclude-glob 'README.md' \
-              --exclude-glob 'compose.yaml' \
-              --exclude-glob 'compose.override.yaml' \
-              --exclude-glob 'test-setup.php' \
-              --exclude-glob '.env' \
-              --exclude-glob '.env.*' \
-              --exclude-glob .git* \
-              --exclude-glob .github/ \
-              --exclude-glob tests/ \
-              --exclude-glob var/cache/ \
-              --exclude-glob var/log/ \
-              ./ $FTP_REMOTE_DIR
-          "
+          rsync -az --delete \
+            -e "ssh -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" \
+            --exclude ".git/" \
+            --exclude ".github/" \
+            --exclude ".idea/" \
+            --exclude ".dockerignore" \
+            --exclude "docker/" \
+            --exclude "openapi/" \
+            --exclude "symfony.lock" \
+            --exclude "docker-start.sh" \
+            --exclude "README.md" \
+            --exclude "compose.yaml" \
+            --exclude "compose.override.yaml" \
+            --exclude "test-setup.php" \
+            --exclude ".env" \
+            --exclude ".env.*" \
+            --exclude "var/cache/" \
+            --exclude "var/log/" \
+            ./ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/
+
+      - name: Post-deploy: install deps, cache, migrations
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            set -e
+            cd ${{ secrets.DEPLOY_PATH }}
+
+            # OPTIONAL (if you want CI to manage env on the server):
+            cat > .env.local <<'EOF'
+            APP_ENV=prod
+            APP_DEBUG=0
+            APP_SECRET=${{ secrets.APP_SECRET }}
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
+            EOF
+
+            composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+
+            php bin/console cache:clear --env=prod
+            php bin/console cache:warmup --env=prod
+
+            # OPTIONAL: run only if you use Doctrine migrations
+            php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration
