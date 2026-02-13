@@ -62,6 +62,25 @@ jobs:
               --exclude-glob '.git/*' \
               --exclude-glob '.idea' \
               --exclude-glob '.idea/*' \
+              --exclude-glob '.dockerignore' \
+              --exclude-glob 'docker' \
+              --exclude-glob 'docker/*' \
+              --exclude-glob 'openapi' \
+              --exclude-glob 'openapi/*' \
+              --exclude-glob 'bin' \
+              --exclude-glob 'bin/*' \
+              --exclude-glob 'migrations' \
+              --exclude-glob 'migrations/*' \
+              --exclude-glob 'composer.json' \
+              --exclude-glob 'composer.lock' \
+              --exclude-glob 'symfony.lock' \
+              --exclude-glob 'docker-start.sh' \
+              --exclude-glob 'README.md' \
+              --exclude-glob 'compose.yaml' \
+              --exclude-glob 'compose.override.yaml' \
+              --exclude-glob 'test-setup.php' \
+              --exclude-glob '.env' \
+              --exclude-glob '.env.*' \
               --exclude-glob .git* \
               --exclude-glob .github/ \
               --exclude-glob tests/ \
