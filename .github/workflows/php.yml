@@ -42,17 +42,17 @@ jobs:
           rm -rf var/cache var/log
           mkdir -p var/cache var/log
 
-      - name: Install rsync
-        run: sudo apt-get update && sudo apt-get install -y rsync
-
-      - name: Start SSH agent and add key
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Deploy files via rsync over SSH
+      - name: Install rsync and sshpass
         run: |
-          rsync -az --delete \
+          sudo apt-get update
+          sudo apt-get install -y rsync sshpass
+
+      - name: Deploy files via rsync over SSH (password auth)
+        env:
+          SSHPASS: ${{ secrets.SSH_PASSWORD }}
+        run: |
+          # Use sshpass to provide the SSH password to rsync/ssh
+          sshpass -e rsync -az --delete \
             -e "ssh -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" \
             --exclude ".git/" \
             --exclude ".github/" \
@@ -60,6 +60,10 @@ jobs:
             --exclude ".dockerignore" \
             --exclude "docker/" \
             --exclude "openapi/" \
+            --exclude "bin/" \
+            --exclude "migrations/" \
+            --exclude "composer.json" \
+            --exclude "composer.lock" \
             --exclude "symfony.lock" \
             --exclude "docker-start.sh" \
             --exclude "README.md" \
@@ -78,7 +82,7 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
           script: |
             set -e
