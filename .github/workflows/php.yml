@@ -84,7 +84,7 @@ jobs:
             cd ${{ secrets.DEPLOY_PATH }}
 
             # OPTIONAL (if you want CI to manage env on the server):
-            cat > .env.local <<'EOF'
+            cat > .env <<'EOF'
             APP_ENV=prod
             APP_DEBUG=0
             APP_SECRET=${{ secrets.APP_SECRET }}
