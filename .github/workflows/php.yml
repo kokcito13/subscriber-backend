@@ -1,0 +1,66 @@
+name: Deploy to InfinityFree (FTP)
+
+on:
+  push:
+    branches: [ "main" ]   # change if needed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"   # set to what your InfinityFree site runs
+          tools: composer
+
+      - name: Install dependencies (prod)
+        run: |
+          composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+
+      # Optional: run tests
+      # - name: Run tests
+      #   run: |
+      #     php bin/phpunit
+
+      - name: Create Symfony env file for server
+        run: |
+          cat > .env.local <<'EOF'
+          APP_ENV=prod
+          APP_DEBUG=0
+          APP_SECRET=${{ secrets.APP_SECRET }}
+          DATABASE_URL=${{ secrets.DATABASE_URL }}
+          EOF
+
+      # IMPORTANT: shared hosting needs writable var/
+      - name: Prepare deploy folder
+        run: |
+          rm -rf var/cache var/log
+          mkdir -p var/cache var/log
+
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Deploy via FTP (mirror)
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
+        run: |
+          lftp -c "
+            set ftp:ssl-allow no;
+            set ftp:passive-mode on;
+            open -u $FTP_USER,$FTP_PASS $FTP_HOST;
+            mirror -R --delete --verbose \
+              --exclude-glob .git* \
+              --exclude-glob .github/ \
+              --exclude-glob tests/ \
+              --exclude-glob var/cache/ \
+              --exclude-glob var/log/ \
+              ./ $FTP_REMOTE_DIR
+          "
