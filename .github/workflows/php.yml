@@ -99,5 +99,3 @@ jobs:
 
             # OPTIONAL: run only if you use Doctrine migrations
             php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration
-
-            ln -s public/index.php www/index.php

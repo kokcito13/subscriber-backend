@@ -30,7 +30,7 @@ WORKDIR /var/www/html
 COPY composer.json composer.lock ./
 
 # Create necessary directories before composer install (needed for scripts)
-RUN mkdir -p var/cache var/log var/sessions public
+RUN mkdir -p var/cache var/log var/sessions www
 
 # Install PHP dependencies (skip scripts during build to avoid bin/console dependency)
 RUN composer install --no-interaction --prefer-dist --no-scripts

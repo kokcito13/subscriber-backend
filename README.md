@@ -125,7 +125,7 @@ The `DATABASE_URL` is automatically configured in the PHP container to connect t
 │   ├── nginx/          # Nginx configuration
 │   └── php/            # PHP Dockerfile
 ├── migrations/         # Database migrations
-├── public/             # Web root
+├── www/                # Web root
 ├── src/                # Application source code
 │   ├── Controller/     # Controllers
 │   ├── Entity/         # Doctrine entities

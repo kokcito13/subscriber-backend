@@ -41,29 +41,29 @@ try {
     if (!$url) {
         throw new \Exception("Invalid DATABASE_URL format");
     }
-    
+
     $host = $url['host'] ?? '127.0.0.1';
     $port = $url['port'] ?? 3306;
     $user = $url['user'] ?? 'root';
     $pass = $url['pass'] ?? '';
     $dbname = ltrim($url['path'] ?? '/app', '/');
-    
+
     // Test connection
     $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
     $pdo = new \PDO($dsn, $user, $pass, [
         \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
         \PDO::ATTR_TIMEOUT => 5,
     ]);
-    
+
     echo "   ✓ Successfully connected to MySQL\n";
     echo "   Host: $host:$port\n";
     echo "   Database: $dbname\n";
-    
+
     // Test query
     $stmt = $pdo->query("SELECT VERSION() as version");
     $version = $stmt->fetch(\PDO::FETCH_ASSOC);
     echo "   MySQL Version: " . $version['version'] . "\n\n";
-    
+
 } catch (\PDOException $e) {
     echo "   ✗ Connection failed: " . $e->getMessage() . "\n";
     echo "   → Make sure MySQL is running and credentials in .env are correct\n\n";
@@ -77,7 +77,7 @@ try {
     $kernel = new \App\Kernel($_ENV['APP_ENV'] ?? 'dev', (bool) ($_ENV['APP_DEBUG'] ?? true));
     $kernel->boot();
     $container = $kernel->getContainer();
-    
+
     if ($container->has('doctrine')) {
         echo "   ✓ Doctrine is configured\n";
         $em = $container->get('doctrine.orm.entity_manager');
@@ -91,6 +91,6 @@ try {
 
 echo "=== Test Complete ===\n";
 echo "\nNext steps:\n";
-echo "1. Start the development server: php -S localhost:8000 -t public\n";
+echo "1. Start the development server: php -S localhost:8000 -t www\n";
 echo "2. Visit http://localhost:8000/test to test the API endpoint\n";
 echo "3. Or use Symfony CLI: symfony server:start\n";

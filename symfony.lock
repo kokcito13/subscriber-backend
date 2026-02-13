@@ -44,7 +44,7 @@
             "ref": "5d454ec6cc4c700ed3d963f3803e1d427d9669fb"
         },
         "files": [
-            "public/.htaccess"
+            "www/.htaccess"
         ]
     },
     "symfony/console": {
@@ -86,7 +86,7 @@
             "config/preload.php",
             "config/routes/framework.yaml",
             "config/services.yaml",
-            "public/index.php",
+            "www/index.php",
             "src/Controller/.gitignore",
             "src/Kernel.php",
             ".editorconfig"
