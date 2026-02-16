@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="24e47ee6-59ca-4d6a-a23a-35c2423ad86d" name="Changes" comment="fix routing">
+    <list default="true" id="24e47ee6-59ca-4d6a-a23a-35c2423ad86d" name="Changes" comment="add composer phar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -146,7 +146,7 @@
       <updated>1770290146643</updated>
       <workItem from="1770290147656" duration="59000" />
       <workItem from="1770290225106" duration="27009000" />
-      <workItem from="1770968947194" duration="12403000" />
+      <workItem from="1770968947194" duration="13447000" />
     </task>
     <task id="LOCAL-00001" summary="add possibility to create subscription">
       <option name="closed" value="true" />
@@ -236,7 +236,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770996620685</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="add composer phar">
+      <option name="closed" value="true" />
+      <created>1771236511019</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1771236511019</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,7 +260,8 @@
     <MESSAGE value="Fix CI" />
     <MESSAGE value="test project" />
     <MESSAGE value="fix routing" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix routing" />
+    <MESSAGE value="add composer phar" />
+    <option name="LAST_COMMIT_MESSAGE" value="add composer phar" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
