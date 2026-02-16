@@ -24,8 +24,8 @@ class HealthController extends AbstractController
         $httpStatus = JsonResponse::HTTP_OK;
 
         try {
-            // Try to connect and run a lightweight query to verify DB readiness
-            $connection->connect();
+            // Try a lightweight query to verify DB readiness. executeQuery will
+            // trigger a connection attempt and will throw on failure.
             $connection->executeQuery('SELECT 1')->fetchOne();
 
             $checks['database'] = ['status' => 'ok'];
