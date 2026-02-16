@@ -57,17 +57,12 @@ class CreateSubscriptionRequest
     public function validateBillingPeriodConstraints(\Symfony\Component\Validator\Context\ExecutionContextInterface $context): void
     {
         if ($this->billingPeriod === 'weekly') {
-            if ($this->billingDayOfMonth !== null || $this->billingMonthOfYear !== null) {
-                $context->buildViolation('Weekly billing period cannot have billingDayOfMonth or billingMonthOfYear set.')
-                    ->addViolation();
-            }
+            $this->billingDayOfMonth = null;
+            $this->billingMonthOfYear = null;
         } elseif ($this->billingPeriod === 'monthly') {
+            $this->billingMonthOfYear = null; // Ensure billingMonthOfYear is null for monthly billing period
             if ($this->billingDayOfMonth === null) {
                 $context->buildViolation('Monthly billing period requires billingDayOfMonth to be set.')
-                    ->addViolation();
-            }
-            if ($this->billingMonthOfYear !== null) {
-                $context->buildViolation('Monthly billing period cannot have billingMonthOfYear set.')
                     ->addViolation();
             }
         } elseif ($this->billingPeriod === 'yearly') {
