@@ -4,7 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Subscription Management REST API built with **Symfony 8.0 / PHP 8.4**, using **MySQL 8.0** via Doctrine ORM. Runs in Docker (PHP-FPM + Nginx + MySQL).
+**Subscription Tracker** is a backend API powering an iOS app that helps users manage and track recurring subscriptions (streaming services, SaaS tools, apps, etc.). The goal is to give users visibility into recurring expenses and prevent forgotten charges.
+
+The backend is a REST API built with **Symfony 8.0 / PHP 8.4**, using **MySQL 8.0** via Doctrine ORM. Runs in Docker (PHP-FPM + Nginx + MySQL).
+
+### Multi-Kernel Setup
+The project runs two Symfony kernels from the same codebase:
+- **`www/`** — main API kernel (`Kernel`), serves `/v1/` subscription endpoints and `/api/auth`
+- **`subscriber/`** — subscriber-facing web kernel (`SubscriberKernel`), separate cache dir (`var/cache/subscriber/`), routes defined in `config/routes_subscriber.yaml`, controllers in `src/Controller/Subscriber/`
 
 ## Commands
 

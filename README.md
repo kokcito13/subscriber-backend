@@ -184,3 +184,68 @@ docker-compose exec php php bin/console cache:clear
 ## 📄 License
 
 Proprietary
+
+
+This architecture ensures:
+
+- separation of UI and logic
+- easier testing
+- easier AI-assisted development
+
+---
+
+# Premium Features (Planned)
+
+The application may include premium functionality unlocked through **Apple In-App Subscriptions**:
+
+Possible premium features:
+
+- Advanced analytics
+- Spending forecasts
+- Subscription reminders and notifications
+- Export reports
+- Unlimited subscription tracking
+- Cloud sync across devices
+
+These subscriptions will be implemented using **StoreKit 2**.
+
+---
+
+# Future Improvements
+
+Planned future enhancements include:
+
+- iCloud synchronization
+- Notifications before renewal
+- Automatic subscription detection
+- Spending charts
+- AI-powered subscription insights
+- Budget recommendations
+
+---
+
+# Development Goals
+
+This project is also intended to demonstrate:
+
+- AI-assisted software development
+- modern SwiftUI application architecture
+- scalable project structure for mobile apps
+
+The codebase is designed to be easy to understand by both **human developers and AI coding assistants**.
+
+---
+
+# Repository Purpose
+
+This repository serves as:
+
+- the main source code for the Subscription Tracker application
+- a shared knowledge base for contributors
+- a context reference for AI development tools
+
+---
+
+# Summary
+
+Subscription Tracker is a lightweight iOS application focused on helping users gain visibility and control over recurring subscriptions. The project prioritizes simplicity, clean architecture, and extensibility for future financial management features.
