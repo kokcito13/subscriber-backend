@@ -4,10 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="24e47ee6-59ca-4d6a-a23a-35c2423ad86d" name="Changes" comment="fix subdomain">
-      <change afterPath="$PROJECT_DIR$/PROJECT_OVERVIEW.md" afterDir="false" />
+    <list default="true" id="24e47ee6-59ca-4d6a-a23a-35c2423ad86d" name="Changes" comment="add documentation">
+      <change afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/Subscriber/HomeController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/subscriber/base.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/subscriber/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/subscribtion-backed.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/subscribtion-backed.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/reference.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/reference.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Subscriber/PageController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +115,9 @@
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/vendor/symfony/monolog-bridge" />
       <path value="$PROJECT_DIR$/vendor/symfony/monolog-bundle" />
+      <path value="$PROJECT_DIR$/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/vendor/symfony/twig-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/twig-bundle" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -167,7 +181,7 @@
       <workItem from="1772523497716" duration="1788000" />
       <workItem from="1773244244182" duration="1197000" />
       <workItem from="1773388825390" duration="6000" />
-      <workItem from="1773388964308" duration="1379000" />
+      <workItem from="1773388964308" duration="2490000" />
     </task>
     <task id="LOCAL-00001" summary="add possibility to create subscription">
       <option name="closed" value="true" />
@@ -289,7 +303,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773389877978</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="add documentation">
+      <option name="closed" value="true" />
+      <created>1773390483129</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1773390483129</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,7 +331,8 @@
     <MESSAGE value="fix validation" />
     <MESSAGE value="add subdomain" />
     <MESSAGE value="fix subdomain" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix subdomain" />
+    <MESSAGE value="add documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="add documentation" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
