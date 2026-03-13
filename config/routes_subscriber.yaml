@@ -1,0 +1,5 @@
+subscriber_controllers:
+    resource:
+        path: ../src/Controller/Subscriber/
+        namespace: App\Controller\Subscriber
+    type: attribute
