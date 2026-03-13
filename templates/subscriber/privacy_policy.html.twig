@@ -1,0 +1,539 @@
+{# TODO: review with legal counsel before publishing #}
+{% extends 'subscriber/base.html.twig' %}
+
+{% block title %}Privacy Policy — {{ app_name }}{% endblock %}
+
+{% block meta_description %}Read the {{ app_name }} Privacy Policy to understand how we collect, use, and protect your personal data when you use our subscription tracking app.{% endblock %}
+
+{% block stylesheets %}
+<link rel="canonical" href="{{ url('subscriber_privacy_policy') }}">
+<style>
+    /* ── Page Hero ────────────────────────────────────────────── */
+    .policy-hero {
+        background: linear-gradient(135deg, #eef0ff 0%, #e8f8fb 100%);
+        padding: 3.5rem 0 2.5rem;
+        border-bottom: 1px solid rgba(92,107,192,0.1);
+    }
+
+    .policy-hero h1 {
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        color: var(--brand-dark);
+    }
+
+    .policy-hero .last-updated {
+        color: var(--brand-text-muted);
+        font-size: 0.9rem;
+    }
+
+    /* ── Layout ───────────────────────────────────────────────── */
+    .policy-wrap {
+        padding: 3rem 0 5rem;
+    }
+
+    /* ── TOC sidebar ──────────────────────────────────────────── */
+    .toc-sidebar {
+        position: sticky;
+        top: 80px;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+    }
+
+    .toc-sidebar nav {
+        font-size: 0.83rem;
+    }
+
+    .toc-sidebar .toc-title {
+        font-weight: 700;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--brand-text-muted);
+        margin-bottom: 0.75rem;
+    }
+
+    .toc-sidebar a {
+        display: block;
+        color: var(--brand-text-muted);
+        text-decoration: none;
+        padding: 0.3rem 0.6rem;
+        border-left: 2px solid transparent;
+        border-radius: 0 4px 4px 0;
+        transition: color 0.15s, border-color 0.15s, background 0.15s;
+        line-height: 1.4;
+    }
+
+    .toc-sidebar a:hover {
+        color: var(--brand-primary);
+        background: rgba(92,107,192,0.06);
+    }
+
+    .toc-sidebar a.active {
+        color: var(--brand-primary);
+        border-left-color: var(--brand-primary);
+        background: rgba(92,107,192,0.08);
+        font-weight: 600;
+    }
+
+    /* ── Content ──────────────────────────────────────────────── */
+    .policy-content section {
+        padding-top: 1rem;
+        margin-bottom: 2.5rem;
+        scroll-margin-top: 90px;
+    }
+
+    .policy-content h2 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--brand-dark);
+        padding-bottom: 0.6rem;
+        border-bottom: 1px solid rgba(92,107,192,0.15);
+        margin-bottom: 1rem;
+    }
+
+    .policy-content p {
+        color: #374151;
+        line-height: 1.75;
+        font-size: 0.95rem;
+    }
+
+    .policy-content ul {
+        color: #374151;
+        font-size: 0.95rem;
+        line-height: 1.75;
+        padding-left: 1.25rem;
+    }
+
+    .policy-content ul li {
+        margin-bottom: 0.3rem;
+    }
+
+    /* ── Mobile TOC (details/summary) ────────────────────────── */
+    details.toc-mobile {
+        background: #fff;
+        border: 1px solid rgba(92,107,192,0.15);
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 2rem;
+    }
+
+    details.toc-mobile summary {
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        color: var(--brand-primary);
+        list-style: none;
+    }
+
+    details.toc-mobile summary::after {
+        content: ' ▾';
+    }
+
+    details.toc-mobile[open] summary::after {
+        content: ' ▴';
+    }
+
+    details.toc-mobile a {
+        display: block;
+        padding: 0.3rem 0;
+        color: var(--brand-text-muted);
+        text-decoration: none;
+        font-size: 0.85rem;
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    details.toc-mobile a:first-of-type {
+        margin-top: 0.5rem;
+    }
+
+    details.toc-mobile a:hover {
+        color: var(--brand-primary);
+    }
+
+    /* ── Back to top ──────────────────────────────────────────── */
+    #back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: var(--brand-primary);
+        color: #fff;
+        border: none;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 16px rgba(92,107,192,0.35);
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.25s, transform 0.25s;
+        z-index: 999;
+    }
+
+    #back-to-top.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    #back-to-top:hover {
+        background: #4a58b0;
+    }
+
+    /* ── Print ────────────────────────────────────────────────── */
+    @media print {
+        nav.navbar, footer, .toc-sidebar, .toc-mobile, #back-to-top {
+            display: none !important;
+        }
+
+        .policy-wrap .col-lg-3 {
+            display: none !important;
+        }
+
+        .policy-wrap .col-lg-9 {
+            width: 100% !important;
+            max-width: 100% !important;
+            flex: 0 0 100% !important;
+        }
+
+        .policy-hero {
+            background: none !important;
+            padding: 1rem 0 !important;
+        }
+
+        body {
+            font-size: 11pt;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+{# ── Page Hero ────────────────────────────────────────────────────────────── #}
+<div class="policy-hero">
+    <div class="container">
+        <div class="d-flex align-items-center gap-2 mb-2" style="font-size:0.82rem;color:var(--brand-text-muted)">
+            <a href="{{ path('subscriber_home') }}" style="color:var(--brand-text-muted);text-decoration:none">Home</a>
+            <i class="bi bi-chevron-right" style="font-size:0.7rem"></i>
+            <span>Privacy Policy</span>
+        </div>
+        <h1>Privacy Policy</h1>
+        <p class="last-updated mb-0">
+            <i class="bi bi-calendar3 me-1"></i> Last updated: {{ last_updated }}
+        </p>
+    </div>
+</div>
+
+{# ── Two-column layout ────────────────────────────────────────────────────── #}
+<div class="policy-wrap">
+    <div class="container">
+        <div class="row g-5">
+
+            {# ── LEFT: TOC (desktop) ────────────────────────────────────── #}
+            <div class="col-lg-3 d-none d-lg-block">
+                <aside class="toc-sidebar">
+                    <p class="toc-title">Contents</p>
+                    <nav id="toc">
+                        <a href="#introduction">1. Introduction</a>
+                        <a href="#information-we-collect">2. Information We Collect</a>
+                        <a href="#how-we-use">3. How We Use Your Information</a>
+                        <a href="#data-sharing">4. Data Sharing &amp; Third Parties</a>
+                        <a href="#data-retention">5. Data Retention</a>
+                        <a href="#your-rights">6. Your Rights and Choices</a>
+                        <a href="#childrens-privacy">7. Children's Privacy</a>
+                        <a href="#security">8. Security</a>
+                        <a href="#changes">9. Changes to This Policy</a>
+                        <a href="#contact">10. Contact Us</a>
+                    </nav>
+                </aside>
+            </div>
+
+            {# ── RIGHT: Content ─────────────────────────────────────────── #}
+            <div class="col-lg-9">
+
+                {# Mobile TOC #}
+                <details class="toc-mobile d-lg-none">
+                    <summary>Table of Contents</summary>
+                    <a href="#introduction">1. Introduction</a>
+                    <a href="#information-we-collect">2. Information We Collect</a>
+                    <a href="#how-we-use">3. How We Use Your Information</a>
+                    <a href="#data-sharing">4. Data Sharing &amp; Third Parties</a>
+                    <a href="#data-retention">5. Data Retention</a>
+                    <a href="#your-rights">6. Your Rights and Choices</a>
+                    <a href="#childrens-privacy">7. Children's Privacy</a>
+                    <a href="#security">8. Security</a>
+                    <a href="#changes">9. Changes to This Policy</a>
+                    <a href="#contact">10. Contact Us</a>
+                </details>
+
+                <div class="policy-content">
+
+                    {# ── 1. Introduction ───────────────────────────────── #}
+                    <section id="introduction">
+                        <h2>1. Introduction</h2>
+                        <p>
+                            Welcome to {{ app_name }}. We are committed to protecting your privacy and
+                            being transparent about how we handle your personal data. This Privacy Policy
+                            explains what information we collect, why we collect it, and how we use it
+                            when you download and use the {{ app_name }} mobile application
+                            (the "App") and any associated services.
+                        </p>
+                        <p>
+                            By using {{ app_name }}, you agree to the practices described in this
+                            Privacy Policy. If you do not agree, please discontinue use of the App.
+                        </p>
+                    </section>
+
+                    {# ── 2. Information We Collect ─────────────────────── #}
+                    <section id="information-we-collect">
+                        <h2>2. Information We Collect</h2>
+                        <p>
+                            We collect the minimum amount of information necessary to provide the
+                            App's features. This includes:
+                        </p>
+                        <p><strong>Information you provide directly:</strong></p>
+                        <ul>
+                            <li>Email address (used to create and identify your account)</li>
+                            <li>Subscription details you enter manually: service name, price, billing period, renewal date, and category</li>
+                        </ul>
+                        <p><strong>Information collected automatically:</strong></p>
+                        <ul>
+                            <li>Basic device information (operating system version, device type) for compatibility purposes</li>
+                            <li>App usage data (feature interactions, crash reports) to improve stability and user experience</li>
+                            <li>IP address, collected transiently during API requests and not stored long-term</li>
+                        </ul>
+                        <p>
+                            We do <strong>not</strong> collect your bank account details, card numbers,
+                            or any financial credentials. All subscription data is entered manually by you.
+                        </p>
+                    </section>
+
+                    {# ── 3. How We Use Your Information ───────────────── #}
+                    <section id="how-we-use">
+                        <h2>3. How We Use Your Information</h2>
+                        <p>We use the information we collect for the following purposes:</p>
+                        <ul>
+                            <li><strong>Account management:</strong> to create, maintain, and authenticate your account</li>
+                            <li><strong>Core functionality:</strong> to store and display your subscription list, calculate spending totals, and generate renewal reminders</li>
+                            <li><strong>Push notifications:</strong> to alert you before upcoming billing dates (only if you grant notification permissions)</li>
+                            <li><strong>Service improvement:</strong> to diagnose technical issues, fix bugs, and improve App performance</li>
+                            <li><strong>Customer support:</strong> to respond to questions or issues you report to us</li>
+                            <li><strong>Legal compliance:</strong> to comply with applicable laws and regulations</li>
+                        </ul>
+                        <p>
+                            We do not use your data for advertising purposes and do not sell your
+                            personal information to third parties.
+                        </p>
+                    </section>
+
+                    {# ── 4. Data Sharing ───────────────────────────────── #}
+                    <section id="data-sharing">
+                        <h2>4. Data Sharing and Third Parties</h2>
+                        <p>
+                            We do not sell, trade, or rent your personal information. We may share
+                            data only in the following limited circumstances:
+                        </p>
+                        <ul>
+                            <li>
+                                <strong>Service providers:</strong> We use trusted infrastructure
+                                providers (e.g. cloud hosting, error monitoring) who process data
+                                solely on our behalf under data processing agreements.
+                            </li>
+                            <li>
+                                <strong>Legal requirements:</strong> We may disclose information if
+                                required by law, court order, or to protect the rights and safety
+                                of our users or the public.
+                            </li>
+                            <li>
+                                <strong>Business transfers:</strong> In the event of a merger,
+                                acquisition, or sale of assets, your data may be transferred to the
+                                acquiring entity, which will be bound by this Privacy Policy.
+                            </li>
+                        </ul>
+                        <p>
+                            Any third-party service providers we engage are contractually required
+                            to protect your data and are prohibited from using it for any purpose
+                            other than providing services to us.
+                        </p>
+                    </section>
+
+                    {# ── 5. Data Retention ─────────────────────────────── #}
+                    <section id="data-retention">
+                        <h2>5. Data Retention</h2>
+                        <p>
+                            We retain your personal data for as long as your account is active or
+                            as needed to provide you with the App's services. If you delete your
+                            account, we will delete or anonymize your personal data within
+                            <strong>30 days</strong>, except where retention is required by
+                            applicable law or legitimate business purposes (such as fraud prevention
+                            or dispute resolution).
+                        </p>
+                        <p>
+                            Aggregated, anonymized analytics data that cannot be linked back to you
+                            may be retained indefinitely for product improvement purposes.
+                        </p>
+                    </section>
+
+                    {# ── 6. Your Rights ────────────────────────────────── #}
+                    <section id="your-rights">
+                        <h2>6. Your Rights and Choices</h2>
+                        <p>
+                            Depending on your location, you may have the following rights regarding
+                            your personal data:
+                        </p>
+                        <ul>
+                            <li><strong>Access:</strong> request a copy of the personal data we hold about you</li>
+                            <li><strong>Correction:</strong> request correction of inaccurate or incomplete data</li>
+                            <li><strong>Deletion:</strong> request deletion of your account and associated data</li>
+                            <li><strong>Portability:</strong> receive your data in a machine-readable format</li>
+                            <li><strong>Restriction:</strong> request that we limit how we process your data in certain circumstances</li>
+                            <li><strong>Objection:</strong> object to processing based on our legitimate interests</li>
+                        </ul>
+                        <p>
+                            To exercise any of these rights, please contact us at
+                            <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.
+                            We will respond to your request within 30 days.
+                        </p>
+                        <p>
+                            You may also opt out of push notifications at any time through your
+                            device's system settings. Opting out will not affect your ability to
+                            use the App's core features.
+                        </p>
+                    </section>
+
+                    {# ── 7. Children's Privacy ─────────────────────────── #}
+                    <section id="childrens-privacy">
+                        <h2>7. Children's Privacy</h2>
+                        <p>
+                            {{ app_name }} is not directed at children under the age of 13 (or 16
+                            in the European Economic Area). We do not knowingly collect personal
+                            information from children. If you are a parent or guardian and believe
+                            your child has provided us with personal data, please contact us
+                            immediately at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
+                            and we will take steps to delete such information.
+                        </p>
+                    </section>
+
+                    {# ── 8. Security ───────────────────────────────────── #}
+                    <section id="security">
+                        <h2>8. Security</h2>
+                        <p>
+                            We take the security of your data seriously. We implement
+                            industry-standard technical and organizational measures to protect your
+                            personal information against unauthorized access, disclosure, alteration,
+                            or destruction. These measures include:
+                        </p>
+                        <ul>
+                            <li>Encrypted data transmission via HTTPS/TLS</li>
+                            <li>Hashed authentication tokens — your raw credentials are never stored in plaintext</li>
+                            <li>Regular security reviews of our infrastructure</li>
+                            <li>Access controls limiting data access to authorized personnel only</li>
+                        </ul>
+                        <p>
+                            While we strive to protect your data, no security system is impenetrable.
+                            If you believe your account has been compromised, please contact us
+                            immediately at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.
+                        </p>
+                    </section>
+
+                    {# ── 9. Changes ────────────────────────────────────── #}
+                    <section id="changes">
+                        <h2>9. Changes to This Policy</h2>
+                        <p>
+                            We may update this Privacy Policy from time to time to reflect changes
+                            in our practices, technology, legal requirements, or other factors. When
+                            we make material changes, we will update the "Last updated" date at the
+                            top of this page and, where appropriate, notify you via the App or by
+                            email.
+                        </p>
+                        <p>
+                            We encourage you to review this Privacy Policy periodically. Your
+                            continued use of {{ app_name }} after any changes constitutes your
+                            acceptance of the updated policy.
+                        </p>
+                    </section>
+
+                    {# ── 10. Contact ───────────────────────────────────── #}
+                    <section id="contact">
+                        <h2>10. Contact Us</h2>
+                        <p>
+                            If you have any questions, concerns, or requests regarding this Privacy
+                            Policy or how we handle your data, please contact us at:
+                        </p>
+                        <p>
+                            <strong>{{ app_name }} Privacy Team</strong><br>
+                            <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
+                        </p>
+                        <p>
+                            We aim to respond to all privacy-related inquiries within
+                            <strong>5 business days</strong>.
+                        </p>
+                    </section>
+
+                </div>{# /.policy-content #}
+            </div>{# /.col-lg-9 #}
+        </div>{# /.row #}
+    </div>{# /.container #}
+</div>{# /.policy-wrap #}
+
+{# ── Back to Top ──────────────────────────────────────────────────────────── #}
+<button id="back-to-top" aria-label="Back to top">
+    <i class="bi bi-chevron-up"></i>
+</button>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+    'use strict';
+
+    /* ── Back to top ─────────────────────────────────────────── */
+    const btn = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 400) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    }, { passive: true });
+
+    btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* ── TOC scroll-spy (IntersectionObserver) ───────────────── */
+    const tocLinks = document.querySelectorAll('#toc a');
+
+    if (tocLinks.length > 0) {
+        const sectionIds = Array.from(tocLinks).map(function (a) {
+            return a.getAttribute('href').slice(1);
+        });
+
+        const sections = sectionIds
+            .map(function (id) { return document.getElementById(id); })
+            .filter(Boolean);
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    tocLinks.forEach(function (a) { a.classList.remove('active'); });
+                    const active = document.querySelector('#toc a[href="#' + entry.target.id + '"]');
+                    if (active) { active.classList.add('active'); }
+                }
+            });
+        }, {
+            rootMargin: '-80px 0px -60% 0px',
+            threshold: 0
+        });
+
+        sections.forEach(function (section) { observer.observe(section); });
+    }
+}());
+</script>
+{% endblock %}

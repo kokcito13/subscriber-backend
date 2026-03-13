@@ -15,4 +15,14 @@ class HomeController extends AbstractController
             'app_name' => 'SubTracker',
         ]);
     }
+
+    #[Route('/privacy-policy', name: 'subscriber_privacy_policy', methods: ['GET'])]
+    public function privacyPolicy(): Response
+    {
+        return $this->render('subscriber/privacy_policy.html.twig', [
+            'app_name'      => 'SubTracker',
+            'last_updated'  => 'March 13, 2026',
+            'contact_email' => 'privacy@subtracker.app',
+        ]);
+    }
 }
