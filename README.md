@@ -1,4 +1,4 @@
-# Subscription Backend
+# Cyla — Backend
 
 Symfony 8.0 application with MySQL database, running in Docker containers.
 
@@ -240,7 +240,7 @@ The codebase is designed to be easy to understand by both **human developers and
 
 This repository serves as:
 
-- the main source code for the Subscription Tracker application
+- the main source code for the Cyla application
 - a shared knowledge base for contributors
 - a context reference for AI development tools
 
@@ -248,4 +248,4 @@ This repository serves as:
 
 # Summary
 
-Subscription Tracker is a lightweight iOS application focused on helping users gain visibility and control over recurring subscriptions. The project prioritizes simplicity, clean architecture, and extensibility for future financial management features.
+Cyla is a lightweight iOS application focused on helping users gain visibility and control over recurring subscriptions. The project prioritizes simplicity, clean architecture, and extensibility for future financial management features.

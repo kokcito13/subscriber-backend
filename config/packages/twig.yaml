@@ -1,5 +1,8 @@
 twig:
     file_name_pattern: '*.twig'
+    globals:
+        app_name: 'Cyla'
+        app_tagline: 'Take control of your subscriptions'
 
 when@test:
     twig:

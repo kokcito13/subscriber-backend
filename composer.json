@@ -1,4 +1,6 @@
 {
+    "name": "cyla/backend",
+    "description": "Cyla — subscription tracker backend API",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
