@@ -1,0 +1,5 @@
+baby_rhythm_controllers:
+    resource:
+        path: ../src/Controller/BabyRhythm/
+        namespace: App\Controller\BabyRhythm
+    type: attribute

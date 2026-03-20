@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="24e47ee6-59ca-4d6a-a23a-35c2423ad86d" name="Changes" comment="Change name to the Cyla" />
+    <list default="true" id="24e47ee6-59ca-4d6a-a23a-35c2423ad86d" name="Changes" comment="Change name to the Cyla">
+      <change afterPath="$PROJECT_DIR$/baby-rhythm/.htaccess" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/baby-rhythm/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/console-baby-rhythm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/routes_baby_rhythm.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BabyRhythmKernel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/BabyRhythm/HomeController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/baby-rhythm/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,6 +37,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -125,7 +135,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/oleksandrklosovych/projects/subscribtion-backed/subscriber",
+    "last_opened_file_path": "/Users/oleksandrklosovych/projects/subscribtion-backed/baby-rhyth",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -136,6 +146,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/baby-rhyth" />
       <recent name="$PROJECT_DIR$/subscriber" />
       <recent name="$PROJECT_DIR$/subscriber/www" />
     </key>
@@ -166,7 +177,8 @@
       <workItem from="1772523497716" duration="1788000" />
       <workItem from="1773244244182" duration="1197000" />
       <workItem from="1773388825390" duration="6000" />
-      <workItem from="1773388964308" duration="5293000" />
+      <workItem from="1773388964308" duration="7051000" />
+      <workItem from="1774020592035" duration="682000" />
     </task>
     <task id="LOCAL-00001" summary="add possibility to create subscription">
       <option name="closed" value="true" />
@@ -328,7 +340,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773395337854</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Change name to the Cyla">
+      <option name="closed" value="true" />
+      <created>1773395679276</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1773395679276</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
