@@ -1,0 +1,88 @@
+{% extends 'baby-rhythm/base.html.twig' %}
+
+{% block title %}Baby Rhythm — Smart Sleep Tracker for Babies 0–36 Months{% endblock %}
+
+{% block meta_description %}Baby Rhythm uses AI to learn your baby's natural sleep rhythm, predict the next nap window, and help you avoid overtiredness. Available on the App Store.{% endblock %}
+
+{% block body %}
+
+{# ── Navbar ───────────────────────────────────────────────────── #}
+<nav class="navbar navbar-expand-lg br-navbar" aria-label="Baby Rhythm main navigation">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <svg class="br-navbar-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="19" cy="4" r="1" fill="currentColor"/>
+                <circle cx="22" cy="2.5" r="0.7" fill="currentColor"/>
+                <circle cx="21" cy="6.5" r="0.5" fill="currentColor"/>
+            </svg>
+            {{ app_name }}
+        </a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button"
+                data-bs-toggle="collapse" data-bs-target="#brNav"
+                aria-controls="brNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="brNav">
+            <div class="ms-auto d-flex align-items-center gap-3 mt-3 mt-lg-0">
+
+                <div class="dropdown">
+                    <button class="br-lang-btn dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false"
+                            aria-label="Select language">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                        EN
+                    </button>
+                    <ul class="dropdown-menu br-lang-menu dropdown-menu-end">
+                        <li><a class="dropdown-item active" href="#">English</a></li>
+                        <li><a class="dropdown-item" href="#">Українська</a></li>
+                        <li><a class="dropdown-item" href="#">Français</a></li>
+                        <li><a class="dropdown-item" href="#">Deutsch</a></li>
+                        <li><a class="dropdown-item" href="#">Italiano</a></li>
+                        <li><a class="dropdown-item" href="#">Español</a></li>
+                    </ul>
+                </div>
+
+                <a href="{{ download_url }}" class="btn-br-appstore" aria-label="Download Baby Rhythm on the App Store">
+                    <svg width="15" height="15" viewBox="0 0 814 1000" fill="currentColor" aria-hidden="true">
+                        <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76.5 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 600.3 0 456.4 0 316.2c0-213 139-325.9 265.7-325.9 71.6 0 131.1 47.2 173.5 47.2 40.2 0 109.7-50.3 190.5-50.3zm-78.5-191.7c37.1-44 63.8-105.2 63.8-166.4 0-8.4-.6-16.8-2-24.5-60.5 2.3-132.4 40.5-175.9 91.3-34.1 37.7-65.4 98.9-65.4 161.2 0 9 1.4 18 2 20.6 3.6.6 8.9 1.3 14.3 1.3 54.8 0 121-36.3 163.2-83.5z"/>
+                    </svg>
+                    Download on the App Store
+                </a>
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main>
+    {% include 'baby-rhythm/landing/_hero.html.twig' %}
+    {% include 'baby-rhythm/landing/_features.html.twig' %}
+    {% include 'baby-rhythm/landing/_how_it_works.html.twig' %}
+
+    {# ── Privacy note ─────────────────────────────────────────── #}
+    <section class="br-privacy" aria-label="Privacy commitment">
+        <div class="container text-center">
+            <div class="br-privacy-icon mx-auto">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+            </div>
+            <p class="br-privacy-text">
+                <strong>Your data stays yours.</strong> Baby Rhythm stores all sleep data securely within your account and on your device.
+                We do not sell your information, share it with advertisers, or use it for any purpose beyond making the app work for you.
+                No ads. No tracking. No surprises.
+            </p>
+        </div>
+    </section>
+</main>
+
+{% include 'baby-rhythm/landing/_footer.html.twig' %}
+
+{% endblock %}

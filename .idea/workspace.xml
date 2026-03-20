@@ -4,15 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="24e47ee6-59ca-4d6a-a23a-35c2423ad86d" name="Changes" comment="Change name to the Cyla">
-      <change afterPath="$PROJECT_DIR$/baby-rhythm/.htaccess" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baby-rhythm/index.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/console-baby-rhythm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/routes_baby_rhythm.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BabyRhythmKernel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/BabyRhythm/HomeController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/baby-rhythm/index.html.twig" afterDir="false" />
+    <list default="true" id="24e47ee6-59ca-4d6a-a23a-35c2423ad86d" name="Changes" comment="add baby rythm sub domain">
+      <change afterPath="$PROJECT_DIR$/baby-rhythm/css/landing.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/baby-rhythm/base.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/baby-rhythm/landing/_features.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/baby-rhythm/landing/_footer.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/baby-rhythm/landing/_hero.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/baby-rhythm/landing/_how_it_works.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/baby-rhythm/landing/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/BabyRhythm/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BabyRhythm/HomeController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,7 +179,7 @@
       <workItem from="1773244244182" duration="1197000" />
       <workItem from="1773388825390" duration="6000" />
       <workItem from="1773388964308" duration="7051000" />
-      <workItem from="1774020592035" duration="682000" />
+      <workItem from="1774020592035" duration="1744000" />
     </task>
     <task id="LOCAL-00001" summary="add possibility to create subscription">
       <option name="closed" value="true" />
@@ -348,7 +349,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773395679276</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="add baby rythm sub domain">
+      <option name="closed" value="true" />
+      <created>1774022737862</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1774022737862</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -372,7 +381,8 @@
     <MESSAGE value="update subscriber home page" />
     <MESSAGE value="subscriber add privacy policy page" />
     <MESSAGE value="Change name to the Cyla" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change name to the Cyla" />
+    <MESSAGE value="add baby rythm sub domain" />
+    <option name="LAST_COMMIT_MESSAGE" value="add baby rythm sub domain" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

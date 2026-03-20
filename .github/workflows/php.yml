@@ -102,5 +102,9 @@ jobs:
             php bin/console-subscriber cache:clear --env=prod
             php bin/console-subscriber cache:warmup --env=prod
 
+            # Baby Rhythm kernel (separate cache dir: var/cache/baby-rhythm/prod)
+            php bin/console-baby-rhythm cache:clear --env=prod
+            php bin/console-baby-rhythm cache:warmup --env=prod
+
             # OPTIONAL: run only if you use Doctrine migrations
             php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration

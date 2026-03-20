@@ -11,6 +11,10 @@ class HomeController extends AbstractController
     #[Route('/', name: 'baby_rhythm_home', methods: ['GET'])]
     public function index(): Response
     {
-        return $this->render('baby-rhythm/index.html.twig');
+        return $this->render('baby-rhythm/landing/index.html.twig', [
+            'app_name'     => 'Baby Rhythm',
+            'app_tagline'  => 'Understand your baby\'s natural rhythm',
+            'download_url' => '#',
+        ]);
     }
 }
